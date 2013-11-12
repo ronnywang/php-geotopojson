@@ -14,3 +14,7 @@ __LICENSE__
 
 __TODO__
 * GeoTopoJSON::toTopoJSON($geojson)
+
+__SEEALSO__
+* http://www.geojson.org/geojson-spec.html
+* https://github.com/topojson/topojson-specification
