@@ -150,7 +150,15 @@ class GeoTopoJSON
             $obj->type = 'FeatureCollection';
             $obj->features = array();
             foreach ($topo_obj->geometries as $geometry) {
-                $obj->features[] = self::topoObjectToGeoObject($geometry, $scale, $translate, $arcs);
+                $geometry_obj = self::topoObjectToGeoObject($geometry, $scale, $translate, $arcs);
+                if ($geometry_obj->type != 'Feature') {
+                    $geometry_feature_obj = new StdClass;
+                    $geometry_feature_obj->type = 'Feature';
+                    $geometry_feature_obj->properties = new StdClass;
+                    $geometry_feature_obj->geometry = $geometry_obj;
+                    $geometry_obj = $geometry_feature_obj;
+                }
+                $obj->features[] = $geometry_obj;
             }
             break;
 
